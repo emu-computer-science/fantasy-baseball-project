@@ -14,4 +14,10 @@ public class Team {
     public void draftPlayer(Player player){
         roster.add(player);
     }
+
+    public void printRoster(){
+        for(int i=0; i<roster.size(); i++){
+            System.out.println(roster.get(i).position + " " + roster.get(i).name);
+        }
+    }
 }
