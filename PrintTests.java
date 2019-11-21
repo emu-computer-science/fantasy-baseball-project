@@ -22,28 +22,28 @@ public class PrintTests {
 	
 	@Test
 	public void testPrintOnePlayer() {
-		assertEquals(playerA.toString()+"\n", Main.overall("1B"));
+		assertEquals(playerA.toString()+"\n", Draft.overall("1B"));
 	}
 	@Test
 	public void testPrintThreePlayer() {
 		String printThree = playerB.toString()+"\n"+playerC.toString()+"\n"+playerD.toString()+"\n";
-		assertEquals(printThree, Main.overall("C"));
+		assertEquals(printThree, Draft.overall("C"));
 	}
 	
 	@Test
 	public void testPrintFilledPosition() {
-		assertEquals("That position is filled", Main.overall("2B"));
+		assertEquals("That position is filled", Draft.overall("2B"));
 	}
 	
 	@Test
 	public void testPrintPitchers() {
-		assertEquals(playerE.toString()+"\n", Main.pOverall());
+		assertEquals(playerE.toString()+"\n", Draft.pOverall());
 	}
 	
 	@Test
 	public void testOnePlayerTeam() {
 		teamA.draftPlayer(playerA);
-		assertEquals(playerA.toString()+"\n", Main.team(teamA));
+		assertEquals(playerA.toString()+"\n", Draft.team(teamA));
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class PrintTests {
 		teamA.draftPlayer(playerB);
 		teamA.draftPlayer(playerE);
 		String threePlayers= playerB.toString()+"\n"+playerA.toString()+"\n"+playerE.toString()+"\n";
-		assertEquals(threePlayers, Main.team(teamA));
+		assertEquals(threePlayers, Draft.team(teamA));
 	}
 	
 }

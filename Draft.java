@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Main {
+public class Draft {
 
     static boolean quit = false;
     static Scanner scanner;
@@ -88,11 +88,13 @@ public class Main {
         }
     }
 
-    public static void increaseDraftIndex(){
+    public static int increaseDraftIndex(){
         draftIndex++;
         if(draftIndex> teams.size()-1){
             draftIndex = 0;
         }
+
+        return draftIndex;
     }
 
 
