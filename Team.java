@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Team {
     String name;
     ArrayList<Player> roster;
+    double teamValuation;
 
 
     public Team(String name) {
