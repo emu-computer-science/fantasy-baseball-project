@@ -39,7 +39,7 @@ public class Driver {
                     "ANOTHERCOMMAND parameters\n" +
                     "ANOTHERCOMMAND parameters\n" +
                     "etc...\n" +
-                    "0: EXIT");
+                    "QUIT");
 
             response = keyboard.nextLine();
             // Use this array to parse the keyboard input 1 word at at time!
