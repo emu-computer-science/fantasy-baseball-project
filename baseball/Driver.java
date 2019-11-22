@@ -75,12 +75,14 @@ public class Driver {
                 case "EVALFUN":
 
                     break;
-                case "PEVALFUN ":
+                case "PEVALFUN":
 
                     break;
+                case "QUIT":
+                    System.exit(0);
                 default:
                     System.out.println("Invalid Option.");
             }
-        } while (!response.equals("QUIT"));
+        } while (true);
     }
 }
