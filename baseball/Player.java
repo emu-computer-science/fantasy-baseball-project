@@ -1,3 +1,5 @@
+package baseball;
+
 public class Player {
 
     String name;
