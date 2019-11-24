@@ -2,37 +2,29 @@ package baseball;
 
 public class Player {
 
-    String name;
-    String position;
-    int runs;
-    int hits;
-    int homeRuns;
+    String firstName;
+    String lastName;
+    String team;
+    private double valuation;
 
-    public Player(String name, String position, int runs, int hits, int homeRuns) {
-        this.name = name;
-        this.position = position;
-        this.runs = runs;
-        this.hits = hits;
-        this.homeRuns = homeRuns;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getPosition() {
-        return position;
+    public String getTeam() {
+        return team;
     }
 
-    public int getRuns() {
-        return runs;
+    public void setValuation(double valuation) {
+        this.valuation = valuation;
     }
 
-    public int getHits() {
-        return hits;
+    public double getValuation() {
+        return valuation;
     }
 
-    public int getHomeRuns() {
-        return homeRuns;
-    }
 }
