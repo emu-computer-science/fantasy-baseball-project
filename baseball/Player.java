@@ -35,4 +35,8 @@ public class Player {
     public int getHomeRuns() {
         return homeRuns;
     }
+    
+    public String toString() {
+    	return name+" "+ position;
+    }
 }

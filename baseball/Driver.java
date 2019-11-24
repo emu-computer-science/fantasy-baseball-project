@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Driver {
-
+	static ArrayList<Player> players = new ArrayList<>();
     private static ArrayList<Player> addPlayers() {
-        ArrayList<Player> players = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("players.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                players.add(new Player(values[1] + " " + values[0], values[2], Integer.valueOf(values[3]), Integer.valueOf(values[4]), Integer.valueOf(values[5])));
+                players.add(new Player(values[1].strip() + " " + values[0], values[2], Integer.valueOf(values[3]), Integer.valueOf(values[4]), Integer.valueOf(values[5])));
             }
         } catch (IOException e) {
             System.out.println("Cannot read file!");
@@ -34,37 +33,49 @@ public class Driver {
         do {
             // TODO: Layout all the options in this print statement
             System.out.println("Select an option:\n" +
-                    "ODRAFT “playerName” leagueMember\n" +
-                    "IDRAFT  “playerName”\n" +
-                    "ANOTHERCOMMAND parameters\n" +
-                    "ANOTHERCOMMAND parameters\n" +
+                    "ODRAFT playerName leagueMember\n" +
+                    "IDRAFT playerName \n" +
+                    "OVERALL position\n" +
+                    "POVERALL \n" +
+                    "TEAM leagueMember\n" +
+                    "STARS leagueMember\n" +
                     "etc...\n" +
                     "QUIT");
-
             response = keyboard.nextLine();
             // Use this array to parse the keyboard input 1 word at at time!
-            String[] responseArray = response.split("");
-
+            String[] responseArray = response.split(" ");
             switch (responseArray[0].toUpperCase()) {
                 // TODO: make sure each command has a case!
+            
                 case "IDRAFT":
-                    // Parse responseArray to get the team requested and player name
-//                    d.oDraft(teamName, resposneArray[2]);
+                    d.iDraft(responseArray[1]+" "+responseArray[2]);
                     break;
                 case "OVERALL":
-                    // Parse the keyboard to grab the right info
-                    // d.overall(*INSERT PARAMETERS HERE);
+                    System.out.println(d.Overall(responseArray[1]));
                     break;
                 case "POVERALL":
                     // grab the things
                     // d.doTheThing();
                     break;
                 case "TEAM":
-                    // you get it at this point
-                    // d.doTheThing();
+                	if(responseArray[1].charAt(4)=='A')
+                		d.team(d.teamA);
+                	else if(responseArray[1].charAt(4)=='B')
+                		d.team(d.teamB);
+                	else if(responseArray[1].charAt(4)=='C')
+                		d.team(d.teamC);
+                	else
+                		d.team(d.teamD);
                     break;
                 case "STARS":
-
+                	if(responseArray[1].charAt(4)=='A')
+                		d.stars(d.teamA);
+                	else if(responseArray[1].charAt(4)=='B')
+                		d.stars(d.teamB);
+                	else if(responseArray[1].charAt(4)=='C')
+                		d.stars(d.teamC);
+                	else
+                		d.stars(d.teamD);
                     break;
                 case "SAVE":
 
