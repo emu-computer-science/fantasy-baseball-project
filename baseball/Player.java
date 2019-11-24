@@ -1,3 +1,5 @@
+package baseball;
+
 public class Player {
 
     String name;
@@ -8,14 +10,12 @@ public class Player {
     int homeRuns;
     double valuation;
 
-    public Player(String name, String position, String realTeam, int runs, int hits, int homeRuns, double valuation) {
+    public Player(String name, String position, int runs, int hits, int homeRuns) {
         this.name = name;
         this.position = position;
-        this.realTeam = realTeam;
         this.runs = runs;
         this.hits = hits;
         this.homeRuns = homeRuns;
-        this.valuation = valuation;
     }
 
     public String getName() {
@@ -42,11 +42,7 @@ public class Player {
         return homeRuns;
     }
     
-    public double getValuation() {
-    	return valuation;
-    }
-    
     public String toString() {
-    	return name+" "+realTeam+" "+position+" "+valuation;
+    	return name+" "+ position;
     }
 }
