@@ -52,7 +52,7 @@ public class Driver {
                     System.out.println(d.iDraft(responseArray[1]+" "+responseArray[2]));
                     break;
                 case "OVERALL":
-                    System.out.println(d.Overall(responseArray[1]));
+                    System.out.println(d.overall(responseArray[1]));
                     break;
                 case "POVERALL":
                     System.out.println(d.pOverall());
@@ -84,7 +84,7 @@ public class Driver {
 
                     break;
                 case "EVALFUN":
-
+                	d.evalfun(responseArray[1]);
                     break;
                 case "PEVALFUN":
 

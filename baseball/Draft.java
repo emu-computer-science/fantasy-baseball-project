@@ -36,7 +36,7 @@ public class Draft {
         return oDraft(teamA, name);
     }
     
-    public String Overall(String position) {
+    public String overall(String position) {
     	String availablePlayers ="";
     	for(int i=0; i<players.size(); i++) {
     		if(players.get(i).position.equals(position))
@@ -101,5 +101,19 @@ public class Draft {
 			teamRoster+=leagueMember.roster.get(i).toString();
 		}
 		return teamRoster;
+	}
+	
+	public double evalfun(String expression) {
+		String regex = "+-*/";
+		expression=expression.strip();
+		String[] expArr = expression.split(regex);
+		for(int i=0; i<expArr.length; i++) {
+			if(expArr[i].equals("*") || expArr[i].equals("/")) {
+				String tmp=expArr[i-1];
+				String tmp2=expArr[i+1];
+			}
+		}
+		
+		return 0.0;
 	}
 }
