@@ -17,22 +17,22 @@ public class Draft {
         this.teamD = new Team("D");
     }
 
-    public boolean oDraft(Team team, String name) {
+    public String oDraft(Team team, String name) {
     	for (int i = 0; i < players.size(); i++) {
             if (players.get(i).name.equals(name)) {
             	if(positionFilled(team, players.get(i).getPosition())) {
-            		System.out.println("Position filled!");
-            		return false;
+            		return "Position filled";
             	}
                 team.draftPlayer(players.get(i));
+                String player=players.get(i).toString();
                 players.remove(i);
-                return true;
+                return player +" has been drafted";
             }
         }
-        return false;
+        return "Player not found";
     }
 
-    public boolean iDraft(String name){
+    public String iDraft(String name){
         return oDraft(teamA, name);
     }
     
@@ -54,16 +54,18 @@ public class Draft {
     	return availablePlayers;
     }
     
-    public void team(Team leagueMember) {
-    	System.out.println(printPosition(leagueMember, "C"));
-    	System.out.println(printPosition(leagueMember, "1B"));
-    	System.out.println(printPosition(leagueMember, "2B"));
-    	System.out.println(printPosition(leagueMember, "3B"));
-    	System.out.println(printPosition(leagueMember, "SS"));
-    	System.out.println(printPosition(leagueMember, "LF"));
-    	System.out.println(printPosition(leagueMember, "CF"));
-    	System.out.println(printPosition(leagueMember, "RF"));
-    	System.out.println(printPitchers(leagueMember));
+    public String team(Team leagueMember) {
+    	String teamRoster="";
+    	teamRoster+=printPosition(leagueMember, "C")+"\n";
+    	teamRoster+=printPosition(leagueMember, "1B")+"\n";
+    	teamRoster+=printPosition(leagueMember, "2B")+"\n";
+    	teamRoster+=printPosition(leagueMember, "3B")+"\n";
+    	teamRoster+=printPosition(leagueMember, "SS")+"\n";
+    	teamRoster+=printPosition(leagueMember, "LF")+"\n";
+    	teamRoster+=printPosition(leagueMember, "CF")+"\n";
+    	teamRoster+=printPosition(leagueMember, "RF")+"\n";
+    	teamRoster+=printPitchers(leagueMember);
+    	return teamRoster;
     }
 
 	private String printPosition(Team leagueMember, String position) {
@@ -87,16 +89,17 @@ public class Draft {
 	
 	private boolean positionFilled(Team leagueMember, String position) {
 		for(int i=0; i<leagueMember.roster.size(); i++) {
-			if(leagueMember.roster.get(i).position.equals(position));
+			if(leagueMember.roster.get(i).position.equals(position))
 				return true;
 		}
 		return false;
 	}
     
-	public void stars(Team leagueMember) {
+	public String stars(Team leagueMember) {
+		String teamRoster="";
 		for (int i = 0; i < leagueMember.roster.size(); i++) {
-			System.out.println(leagueMember.roster.get(i).position
-					+ " " + leagueMember.roster.get(i).name);
+			teamRoster+=leagueMember.roster.get(i).toString();
 		}
+		return teamRoster;
 	}
 }

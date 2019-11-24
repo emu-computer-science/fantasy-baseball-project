@@ -39,7 +39,8 @@ public class Driver {
                     "POVERALL \n" +
                     "TEAM leagueMember\n" +
                     "STARS leagueMember\n" +
-                    "etc...\n" +
+                    "SAVE filename \n" +
+                    "Restore filename\n" +
                     "QUIT");
             response = keyboard.nextLine();
             // Use this array to parse the keyboard input 1 word at at time!
@@ -48,34 +49,33 @@ public class Driver {
                 // TODO: make sure each command has a case!
             
                 case "IDRAFT":
-                    d.iDraft(responseArray[1]+" "+responseArray[2]);
+                    System.out.println(d.iDraft(responseArray[1]+" "+responseArray[2]));
                     break;
                 case "OVERALL":
                     System.out.println(d.Overall(responseArray[1]));
                     break;
                 case "POVERALL":
-                    // grab the things
-                    // d.doTheThing();
+                    System.out.println(d.pOverall());
                     break;
                 case "TEAM":
                 	if(responseArray[1].charAt(4)=='A')
-                		d.team(d.teamA);
+                		System.out.println(d.team(d.teamA));
                 	else if(responseArray[1].charAt(4)=='B')
-                		d.team(d.teamB);
+                		System.out.println(d.team(d.teamB));
                 	else if(responseArray[1].charAt(4)=='C')
-                		d.team(d.teamC);
+                		System.out.println(d.team(d.teamC));
                 	else
-                		d.team(d.teamD);
+                		System.out.println(d.team(d.teamD));
                     break;
                 case "STARS":
                 	if(responseArray[1].charAt(4)=='A')
-                		d.stars(d.teamA);
+                		System.out.println(d.stars(d.teamA));
                 	else if(responseArray[1].charAt(4)=='B')
-                		d.stars(d.teamB);
+                		System.out.println(d.stars(d.teamB));
                 	else if(responseArray[1].charAt(4)=='C')
-                		d.stars(d.teamC);
+                		System.out.println(d.stars(d.teamC));
                 	else
-                		d.stars(d.teamD);
+                		System.out.println(d.stars(d.teamD));
                     break;
                 case "SAVE":
 
