@@ -21,7 +21,6 @@ public class Hitter extends Player {
         this.avg = avg;
         this.obp = obp;
         this.ops = ops;
-        System.out.println(this.getName());
     }
 
     @Override

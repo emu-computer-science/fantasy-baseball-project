@@ -5,7 +5,7 @@ public class Player {
     String firstName;
     String lastName;
     String team;
-    private double valuation;
+    private Double valuation;
 
 
     public String getFirstName() {
@@ -27,7 +27,7 @@ public class Player {
         this.valuation = valuation;
     }
 
-    public double getValuation() {
+    public Double getValuation() {
         return valuation;
     }
 

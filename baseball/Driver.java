@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.script.ScriptException;
+
 public class Driver {
 
     private static ArrayList<Hitter> getHitters() {
@@ -41,7 +43,7 @@ public class Driver {
         return pitchers;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ScriptException {
         // Use this scanner to read the user input!
         Scanner keyboard = new Scanner(System.in);
 
@@ -52,9 +54,9 @@ public class Driver {
         do {
             // TODO: Layout all the options in this print statement
             System.out.println("Select an option:\n" +
-                    "ODRAFT “lastName,firstInitial” leagueMember\n" +
-                    "IDRAFT  “lastName,firstInitial”\n" +
-                    "TEAM “teamName” \n" +
+                    "ODRAFT lastName,firstInitial leagueMember\n" +
+                    "IDRAFT  lastName,firstInitial\n" +
+                    "TEAM teamName \n" +
                     "ANOTHERCOMMAND parameters\n" +
                     "etc...\n" +
                     "QUIT");
@@ -78,12 +80,15 @@ public class Driver {
                     }
                     break;
                 case "OVERALL":
-//                     Parse the keyboard to grab the right info
-//                     d.overall(*INSERT PARAMETERS HERE);
+                	if(responseArray.length==2) {
+                		System.out.println(d.overall(responseArray[1].toUpperCase()));
+                	}
+                	if(responseArray.length==1) {
+                		System.out.println(d.overall(""));
+                	}
                     break;
                 case "POVERALL":
-                    // grab the things
-                    // d.doTheThing();
+                    System.out.println(d.pOverall());
                     break;
                 case "TEAM":
                     if(responseArray.length>1) {
@@ -91,7 +96,7 @@ public class Driver {
                     }
                     break;
                 case "STARS":
-
+                	System.out.println(d.stars(responseArray[1].toUpperCase()));
                     break;
                 case "SAVE":
 
@@ -100,10 +105,10 @@ public class Driver {
 
                     break;
                 case "EVALFUN":
-
+                	d.evalFun(responseArray[1]);
                     break;
                 case "PEVALFUN":
-
+                	d.pEvalFun(responseArray[1]);
                     break;
                 case "QUIT":
                     System.exit(0);

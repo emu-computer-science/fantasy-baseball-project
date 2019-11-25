@@ -2,6 +2,9 @@ package baseball;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 public class Draft {
     ArrayList<Hitter> hitters;
@@ -48,6 +51,7 @@ public class Draft {
             	}
             	Hitter hitter = hitters.get(i);
                 selected.draftHitter(hitters.get(i));
+                selected.fullRoster.add(hitters.get(i));
                 hitters.remove(i);
                 return hitter.toString() + " has been successfully drafted";
             }
@@ -60,6 +64,7 @@ public class Draft {
 				}
 				Pitcher pitcher = pitchers.get(i);
 				selected.draftPitcher(pitchers.get(i));
+				selected.fullRoster.add(pitchers.get(i));
 				pitchers.remove(i);
 				return pitcher.toString()+ " has been successfully drafted";
 			}
@@ -83,56 +88,62 @@ public class Draft {
         return oDraft("A", name);
     }
     
-//    public String Overall(String position) {
-//    	String availablePlayers ="";
-//    	for(int i=0; i<players.size(); i++) {
-//    		if(players.get(i).position.equals(position))
-//    			availablePlayers+=players.get(i).toString()+"\n";
-//    	}
-//    	return availablePlayers;
-//    }
-//
-//    public String pOverall() {
-//    	String availablePlayers ="";
-//    	for(int i=0; i<players.size(); i++) {
-//    		if(players.get(i).position == "P")
-//    			availablePlayers+=players.get(i).toString()+"\n";
-//    	}
-//    	return availablePlayers;
-//    }
-    
-//    public String team(Team leagueMember) {
-//    	String teamRoster="";
-//    	teamRoster+=printPosition(leagueMember, "C")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "1B")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "2B")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "3B")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "SS")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "LF")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "CF")+"\n";
-//    	teamRoster+=printPosition(leagueMember, "RF")+"\n";
-//    	teamRoster+=printPitchers(leagueMember);
-//    	return teamRoster;
-//    }
+    public String overall(String position) {
+		String availablePlayers = "";
+		if (!(position.isEmpty()) && !(positionFilled(teamA, position))) {
+			for (int i = 0; i < hitters.size(); i++) {
+				if (hitters.get(i).getPosition().equals(position))
+					availablePlayers += hitters.get(i).toString() + " "+ hitters.get(i).getValuation()+"\n";
+			}
+		}
+		else if(!(position.isEmpty()) && positionFilled(teamA, position))
+			availablePlayers+="Position filled already";
+		else {
+			for(int i = 0; i <hitters.size(); i++)
+				availablePlayers += hitters.get(i).toString() + " "+ hitters.get(i).getValuation()+"\n";
+		}
+		return availablePlayers;
+    }
 
-//	private String printPosition(Team leagueMember, String position) {
-//		for(int i=0; i<leagueMember.roster.size(); i++) {
-//    		if(leagueMember.roster.get(i).position.equals(position))
-//    			return position+ " "+leagueMember.roster.get(i).getName();
-//    	}
-//		return position+" unfilled";
-//	}
-//
-//	private String printPitchers(Team leagueMember) {
-//		String pitchers="";
-//		for(int i=0; i<leagueMember.roster.size(); i++) {
-//    		if(leagueMember.roster.get(i).position.equals("P"))
-//    			pitchers+="P "+ leagueMember.roster.get(i).getName()+"\n";
-//    	}
-//		if(pitchers.isEmpty())
-//			return "No pitchers on roster";
-//		return pitchers;
-//	}
+    public String pOverall() {
+    	String availablePlayers ="";
+    	for(int i=0; i<pitchers.size(); i++) {
+    		availablePlayers+=pitchers.get(i).toString()+"\n";
+    	}
+    	return availablePlayers;
+    }
+    
+    public String team(Team leagueMember) {
+    	String teamRoster="";
+    	teamRoster+=printPosition(leagueMember, "C")+"\n";
+    	teamRoster+=printPosition(leagueMember, "1B")+"\n";
+    	teamRoster+=printPosition(leagueMember, "2B")+"\n";
+    	teamRoster+=printPosition(leagueMember, "3B")+"\n";
+    	teamRoster+=printPosition(leagueMember, "SS")+"\n";
+    	teamRoster+=printPosition(leagueMember, "LF")+"\n";
+    	teamRoster+=printPosition(leagueMember, "CF")+"\n";
+    	teamRoster+=printPosition(leagueMember, "RF")+"\n";
+    	teamRoster+=printPitchers(leagueMember);
+    	return teamRoster;
+    }
+
+	private String printPosition(Team leagueMember, String position) {
+		for(int i=0; i<leagueMember.hitters.size(); i++) {
+    		if(leagueMember.hitters.get(i).getPosition().equals(position))
+    			return position+ " "+leagueMember.hitters.get(i).getName();
+    	}
+		return position+" unfilled";
+	}
+
+	private String printPitchers(Team leagueMember) {
+		String pitchers="";
+		for(int i=0; i<leagueMember.pitchers.size(); i++) {
+    		pitchers+="P "+ leagueMember.pitchers.get(i).getName()+"\n";
+    	}
+		if(pitchers.isEmpty())
+			return "No pitchers on roster";
+		return pitchers;
+	}
 	
 	private boolean positionFilled(Team leagueMember, String position) {
 		for(int i=0; i<leagueMember.hitters.size(); i++) {
@@ -142,11 +153,59 @@ public class Draft {
 		return false;
 	}
     
-//	public String stars(Team leagueMember) {
-//		String teamRoster="";
-//		for (int i = 0; i < leagueMember.roster.size(); i++) {
-//			teamRoster+=leagueMember.roster.get(i).toString();
-//		}
-//		return teamRoster;
-//	}
+	public String stars(String name) {
+		String teamRoster = "";
+		Team selected = null;
+		for (int i = 0; i < teams.size(); i++) {
+			if (name.toUpperCase().equals(teams.get(i).name.toUpperCase())) {
+				selected = teams.get(i);
+			}
+		}
+		if (!(selected == null)) {
+			for (int i = 0; i < selected.fullRoster.size(); i++) {
+				teamRoster += selected.fullRoster.get(i).toString() +" \n";
+			}
+		}
+		return teamRoster;
+	}
+	
+	public void evalFun(String expression) throws ScriptException{
+		try {
+		ScriptEngineManager mgr=new ScriptEngineManager();
+		ScriptEngine engine = mgr.getEngineByName("JavaScript");
+		for(int i=0; i<hitters.size(); i++) {
+			engine.put("AVG", hitters.get(i).getAvg());
+			engine.put("OBP", hitters.get(i).getAvg());
+			engine.put("OPS", hitters.get(i).getOps());
+			engine.put("RUNS", hitters.get(i).getRuns());
+			engine.put("HITS", hitters.get(i).getHits());
+			engine.put("HOMERUNS", hitters.get(i).getHomeRuns());
+			hitters.get(i).setValuation((double) engine.eval(expression));
+		}
+		Collections.sort(hitters, 
+                (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
+		}catch(Exception e) {
+			System.out.println("Please only use approved variables, AVG, OBP, OPS"
+					+ "RUNS, HITS, HOMERUNS");
+		}
+	}
+	
+	public void pEvalFun(String expression)throws ScriptException{
+		try {
+			ScriptEngineManager mgr=new ScriptEngineManager();
+			ScriptEngine engine = mgr.getEngineByName("JavaScript");
+			for(int i=0; i<pitchers.size(); i++) {
+				engine.put("ERA", pitchers.get(i).getEra());
+				engine.put("WHIP", pitchers.get(i).getWhip());
+				engine.put("SO", pitchers.get(i).getSo());
+				engine.put("SRA", pitchers.get(i).getSra());
+				pitchers.get(i).setValuation((double) engine.eval(expression));
+			}
+			Collections.sort(pitchers, 
+	                (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
+		}catch(Exception e) {
+			System.out.println("Please only use approved variables, ERA, WHIP, "
+					+ "SRA");
+		}
+	}
 }

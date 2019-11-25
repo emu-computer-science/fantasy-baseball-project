@@ -7,6 +7,7 @@ public class Team {
     String name;
     ArrayList<Hitter> hitters;
     ArrayList<Pitcher> pitchers;
+    ArrayList<Player> fullRoster;
     String [] positionOrder;
     double teamValuation;
 
@@ -16,6 +17,7 @@ public class Team {
         this.positionOrder = new String[] {"C", "1B", "2B", "3B", "SS", "LF", "CF", "RF"};
         this.hitters = new ArrayList<>();
         this.pitchers = new ArrayList<>();
+        this.fullRoster = new ArrayList<>();
 
     }
 
