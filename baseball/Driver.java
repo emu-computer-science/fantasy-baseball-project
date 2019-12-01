@@ -69,34 +69,34 @@ public class Driver {
             switch (responseArray[0].toUpperCase()) {
                 // TODO: make sure each command has a case!
                 case "ODRAFT":
-                    if(responseArray.length>1){
+                    if (responseArray.length > 1) {
                         System.out.println(d.oDraft(responseArray[2].toUpperCase(), responseArray[1].toUpperCase()));
                     }
 
                     break;
                 case "IDRAFT":
-                    if(responseArray.length>1) {
+                    if (responseArray.length > 1) {
                         System.out.println(d.iDraft(responseArray[1].toUpperCase()));
                     }
                     break;
                 case "OVERALL":
-                	if(responseArray.length==2) {
-                		System.out.println(d.overall(responseArray[1].toUpperCase()));
-                	}
-                	if(responseArray.length==1) {
-                		System.out.println(d.overall(""));
-                	}
+                    if (responseArray.length == 2) {
+                        System.out.println(d.overall(responseArray[1].toUpperCase()));
+                    }
+                    if (responseArray.length == 1) {
+                        System.out.println(d.overall(""));
+                    }
                     break;
                 case "POVERALL":
                     System.out.println(d.pOverall());
                     break;
                 case "TEAM":
-                    if(responseArray.length>1) {
+                    if (responseArray.length > 1) {
                         d.printRoster(responseArray[1].toUpperCase());
                     }
                     break;
                 case "STARS":
-                	System.out.println(d.stars(responseArray[1].toUpperCase()));
+                    System.out.println(d.stars(responseArray[1].toUpperCase()));
                     break;
                 case "SAVE":
 
@@ -105,10 +105,10 @@ public class Driver {
 
                     break;
                 case "EVALFUN":
-                	d.evalFun(responseArray[1]);
+                    d.evalFun(responseArray[1]);
                     break;
                 case "PEVALFUN":
-                	d.pEvalFun(responseArray[1]);
+                    d.pEvalFun(responseArray[1]);
                     break;
                 case "QUIT":
                     System.exit(0);

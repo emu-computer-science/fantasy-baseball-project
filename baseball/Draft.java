@@ -33,46 +33,83 @@ public class Draft {
     }
 
     public String oDraft(String team, String name) {
-    	Team selected = null;
-    	for(int i=0; i<teams.size(); i++){
-    		if(team.equals(teams.get(i).getName())){
-    			selected = teams.get(i);
+
+		name = name.replace("\"", "");
+		Team selected = null;
+		for (int i = 0; i < teams.size(); i++) {
+			if (team.equals(teams.get(i).getName())) {
+				selected = teams.get(i);
 			}
 		}
 
-    	if(selected == null){
-    		return "Invalid team name!";
+		if (selected == null) {
+			return "Invalid team name!";
 		}
 
-    	for (int i = 0; i < hitters.size(); i++) {
-            if (hitters.get(i).getName().toUpperCase().equals(name)) {
-            	if(positionFilled(selected, hitters.get(i).getPosition())) {
-            		return "Position filled";
-            	}
-            	Hitter hitter = hitters.get(i);
-                selected.draftHitter(hitters.get(i));
-                selected.fullRoster.add(hitters.get(i));
-                hitters.remove(i);
-                return hitter.toString() + " has been successfully drafted";
-            }
-        }
+		int uniqueMatches = 0;
+		Hitter uniqueHitter = null;
+		Pitcher uniquePitcher = null;
 
+		for (int i = 0; i < hitters.size(); i++) {
+			if (hitters.get(i).getLastName().toUpperCase().equals(name)) {
+				uniqueMatches++;
+				uniqueHitter = hitters.get(i);
+			}
+		}
 		for (int i = 0; i < pitchers.size(); i++) {
-			if (pitchers.get(i).getName().toUpperCase().equals(name)) {
-				if(selected.getPitchers().size()>=5) {
-					return "Already have 5 pitchers!";
-				}
-				Pitcher pitcher = pitchers.get(i);
-				selected.draftPitcher(pitchers.get(i));
-				selected.fullRoster.add(pitchers.get(i));
-				pitchers.remove(i);
-				return pitcher.toString()+ " has been successfully drafted";
+			if (pitchers.get(i).getLastName().toUpperCase().equals(name)) {
+				uniqueMatches++;
+				uniquePitcher = pitchers.get(i);
 			}
 		}
 
+		if (uniqueMatches > 1) {
+			return ("The given name was insufficient in identifying a unique player, please enter a first initial as well");
+		} else if (uniqueMatches == 1) {
+			if (uniqueHitter != null) {
+				selected.draftHitter(uniqueHitter);
+				selected.fullRoster.add(uniqueHitter);
+				hitters.remove(hitters.indexOf(uniqueHitter));
+				return uniqueHitter.toString() + " has been successfully drafted";
+			}
+			else{
+				selected.draftPitcher(uniquePitcher);
+				selected.fullRoster.add(uniquePitcher);
+				hitters.remove(hitters.indexOf(uniquePitcher));
+				return uniquePitcher.toString() + " has been successfully drafted";
+			}
 
-        return "Player not found";
-    }
+		} else {
+			for (int i = 0; i < hitters.size(); i++) {
+				if (hitters.get(i).getName().toUpperCase().equals(name)) {
+					if (positionFilled(selected, hitters.get(i).getPosition())) {
+						return "Position filled";
+					}
+					Hitter hitter = hitters.get(i);
+					selected.draftHitter(hitters.get(i));
+					selected.fullRoster.add(hitters.get(i));
+					hitters.remove(i);
+					return hitter.toString() + " has been successfully drafted";
+				}
+			}
+
+			for (int i = 0; i < pitchers.size(); i++) {
+				if (pitchers.get(i).getName().toUpperCase().equals(name)) {
+					if (selected.getPitchers().size() >= 5) {
+						return "Already have 5 pitchers!";
+					}
+					Pitcher pitcher = pitchers.get(i);
+					selected.draftPitcher(pitchers.get(i));
+					selected.fullRoster.add(pitchers.get(i));
+					pitchers.remove(i);
+					return pitcher.toString() + " has been successfully drafted";
+				}
+			}
+
+
+			return "Player not found";
+		}
+	}
 
 	public void printRoster(String name){
 		for(int i =0; i<teams.size(); i++){
