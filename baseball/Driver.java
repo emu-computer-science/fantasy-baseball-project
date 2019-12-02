@@ -65,19 +65,14 @@ public class Driver {
             // Use this array to parse the keyboard input 1 word at at time!
             String[] responseArray = response.split(" ");
 
-
+            try {
             switch (responseArray[0].toUpperCase()) {
                 // TODO: make sure each command has a case!
                 case "ODRAFT":
-                    if (responseArray.length > 1) {
                         System.out.println(d.oDraft(responseArray[2].toUpperCase(), responseArray[1].toUpperCase()));
-                    }
-
                     break;
                 case "IDRAFT":
-                    if (responseArray.length > 1) {
                         System.out.println(d.iDraft(responseArray[1].toUpperCase()));
-                    }
                     break;
                 case "OVERALL":
                     if (responseArray.length == 2) {
@@ -91,9 +86,7 @@ public class Driver {
                     System.out.println(d.pOverall());
                     break;
                 case "TEAM":
-                    if (responseArray.length > 1) {
                         d.printRoster(responseArray[1].toUpperCase());
-                    }
                     break;
                 case "STARS":
                     System.out.println(d.stars(responseArray[1].toUpperCase()));
@@ -114,6 +107,9 @@ public class Driver {
                     System.exit(0);
                 default:
                     System.out.println("Invalid Option.");
+            }
+            }catch(ArrayIndexOutOfBoundsException e) {
+            	System.out.println("Incorrect amount of paramaters");
             }
         } while (true);
     }

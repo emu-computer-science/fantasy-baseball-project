@@ -141,6 +141,9 @@ public class Draft {
     }
 
     public String pOverall() {
+    	if (teamA.getPitchers().size() >= 5) {
+            return "Already have 5 pitchers!";
+        }
         String availablePlayers = "";
         for (int i = 0; i < pitchers.size(); i++) {
             availablePlayers += pitchers.get(i).toString() + "\n";
