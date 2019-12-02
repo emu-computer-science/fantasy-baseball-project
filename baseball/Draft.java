@@ -214,7 +214,7 @@ public class Draft {
         try {
             for (int i = 0; i < teams.size(); i++) {
                 Team currentTeam = teams.get(i);
-                writer = new BufferedWriter(new FileWriter(fileName + " " + currentTeam.getName() + ".txt"));
+                writer = new BufferedWriter(new FileWriter(fileName + " " + currentTeam.getName() + ".fantasy.txt"));
                 for (int j = 0; j < currentTeam.fullRoster.size(); j++) {
                     writer.write(currentTeam.fullRoster.get(j).getName());
                 }
