@@ -30,10 +30,6 @@ public class Draft {
         this.teams.add(teamB);
         this.teams.add(teamC);
         this.teams.add(teamD);
-        teams.add(teamA);
-        teams.add(teamB);
-        teams.add(teamC);
-        teams.add(teamD);
     }
 
     public String oDraft(String team, String name) {
@@ -238,10 +234,6 @@ public class Draft {
         this.teams.add(teamB);
         this.teams.add(teamC);
         this.teams.add(teamD);
-        teams.add(teamA);
-        teams.add(teamB);
-        teams.add(teamC);
-        teams.add(teamD);
 
         try {
             for (int i = 0; i < teams.size(); i++) {
