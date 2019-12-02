@@ -10,44 +10,11 @@ import javax.script.ScriptException;
 
 public class Driver {
 
-    private static ArrayList<Hitter> getHitters() {
-        ArrayList<Hitter> hitters = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src/Hitters.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                hitters.add(new Hitter(values[1], values[0], values[3], values[2],
-                        Integer.valueOf(values[4]), Integer.valueOf(values[5]), Integer.valueOf(values[6]),
-                        Double.valueOf(values[7]), Double.valueOf(values[8]), Double.valueOf(values[9])));
-            }
-        } catch (IOException e) {
-            System.out.println("Cannot read file!");
-        }
-
-        return hitters;
-    }
-
-    private static ArrayList<Pitcher> getPitchers() {
-        ArrayList<Pitcher> pitchers = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("src/Pitchers.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                pitchers.add(new Pitcher(values[1], values[0], values[2], Double.valueOf(values[3]),
-                        Integer.valueOf(values[4]), Double.valueOf(values[5]), Double.valueOf(values[6])));
-            }
-        } catch (IOException e) {
-            System.out.println("Cannot read file!");
-        }
-
-        return pitchers;
-    }
-
     public static void main(String[] args) throws ScriptException {
         // Use this scanner to read the user input!
         Scanner keyboard = new Scanner(System.in);
 
-        Draft d = new Draft(getHitters(), getPitchers());
+        Draft d = new Draft();
 
         String response;
 
