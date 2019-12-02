@@ -102,7 +102,7 @@ public class Driver {
                     d.save(responseArray[1]);
                     break;
                 case "RESTORE":
-
+                    d.restore(responseArray[1]);
                     break;
                 case "EVALFUN":
                     d.evalFun(responseArray[1]);

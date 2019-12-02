@@ -1,8 +1,6 @@
 package baseball;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.script.ScriptEngine;
@@ -222,6 +220,38 @@ public class Draft {
                 }
 
                 writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean restore(String fileName) {
+        // Restarting every team to start from the restore point
+        this.teams = new ArrayList<>();
+        this.teamA = new Team("A");
+        this.teamB = new Team("B");
+        this.teamC = new Team("C");
+        this.teamD = new Team("D");
+        this.teams.add(teamA);
+        this.teams.add(teamB);
+        this.teams.add(teamC);
+        this.teams.add(teamD);
+        teams.add(teamA);
+        teams.add(teamB);
+        teams.add(teamC);
+        teams.add(teamD);
+
+        try {
+            for (int i = 0; i < teams.size(); i++) {
+                Team currentTeam = teams.get(i);
+                BufferedReader reader = new BufferedReader(new FileReader(fileName + " " + currentTeam.getName() + ".fantasy.txt"));
+                for (int j = 0; j < currentTeam.fullRoster.size(); j++) {
+                    oDraft(currentTeam.getName(), reader.readLine());
+                }
+
+                reader.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
