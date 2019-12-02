@@ -99,7 +99,7 @@ public class Driver {
                     System.out.println(d.stars(responseArray[1].toUpperCase()));
                     break;
                 case "SAVE":
-
+                    d.save(responseArray[1]);
                     break;
                 case "RESTORE":
 
