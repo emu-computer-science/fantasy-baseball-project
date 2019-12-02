@@ -34,7 +34,7 @@ public class Draft {
 
     public String oDraft(String team, String name) {
 
-        name = name.replace("\"", "");
+        name = name.replace("\"", "").toUpperCase();
         Team selected = null;
         for (int i = 0; i < teams.size(); i++) {
             if (team.equals(teams.get(i).getName())) {
@@ -237,10 +237,11 @@ public class Draft {
 
         try {
             for (int i = 0; i < teams.size(); i++) {
+                String player;
                 Team currentTeam = teams.get(i);
                 BufferedReader reader = new BufferedReader(new FileReader(fileName + " " + currentTeam.getName() + ".fantasy.txt"));
-                for (int j = 0; j < currentTeam.fullRoster.size(); j++) {
-                    oDraft(currentTeam.getName(), reader.readLine());
+                while ((player = reader.readLine()) != null) {
+                    System.out.println(oDraft(currentTeam.getName(), "\"" + player + "\""));
                 }
 
                 reader.close();
