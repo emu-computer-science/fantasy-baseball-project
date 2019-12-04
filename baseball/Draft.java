@@ -263,7 +263,8 @@ public class Draft {
                 engine.put("SO", pitchers.get(i).getSo());
                 engine.put("AVG", pitchers.get(i).getAvg());
                 engine.put("IP", pitchers.get(i).getIp());
-                pitchers.get(i).setValuation((double) engine.eval(expression));
+                double playerEval=(double) engine.eval(expression);
+                pitchers.get(i).setValuation(Math.round(playerEval*100)/100.0);
             }
             Collections.sort(pitchers,
                     (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
