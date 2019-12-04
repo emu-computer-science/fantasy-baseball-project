@@ -16,7 +16,7 @@ public class Player {
         return lastName;
     }
 
-    public String getName(){return lastName.trim() + "," + firstName.trim();}
+    public String getName(){return lastName.trim() + ", " + firstName.trim();}
 
 
     public String getTeam() {

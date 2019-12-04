@@ -105,7 +105,7 @@ public class Draft {
                 }
             }
 
-
+            System.out.println(name);
             return "Player not found";
         }
     }
@@ -263,12 +263,13 @@ public class Draft {
             ScriptEngine engine = mgr.getEngineByName("JavaScript");
             for (int i = 0; i < hitters.size(); i++) {
                 engine.put("AVG", hitters.get(i).getAvg());
-                engine.put("OBP", hitters.get(i).getAvg());
+                engine.put("OBP", hitters.get(i).getObp());
                 engine.put("OPS", hitters.get(i).getOps());
                 engine.put("RUNS", hitters.get(i).getRuns());
                 engine.put("HITS", hitters.get(i).getHits());
                 engine.put("HOMERUNS", hitters.get(i).getHomeRuns());
-                hitters.get(i).setValuation((double) engine.eval(expression));
+                double playerEval=(double) engine.eval(expression);
+                hitters.get(i).setValuation(Math.round(playerEval*100)/100.0);
             }
             Collections.sort(hitters,
                     (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));

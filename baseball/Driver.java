@@ -19,33 +19,45 @@ public class Driver {
         String response;
 
         do {
-            // TODO: Layout all the options in this print statement
             System.out.println("Select an option:\n" +
                     "ODRAFT lastName,firstInitial leagueMember\n" +
                     "IDRAFT  lastName,firstInitial\n" +
+                    "OVERALL  POSITION OR LEAVE BLANK FOR ALL POSITIONS\n" +
+                    "POVERALL \n" +
                     "TEAM teamName \n" +
-                    "ANOTHERCOMMAND parameters\n" +
-                    "etc...\n" +
+                    "STARS teamName \n" +
+                    "SAVE fileName \n" +
+                    "RESTORE fileName \n" +
+                    "EVALFUN Expression with hitter stats \n" +
+                    "PEVALFUN Expression with pitcher stats \n" +
                     "QUIT");
 
             response = keyboard.nextLine();
-            // Use this array to parse the keyboard input 1 word at at time!
             String[] responseArray = response.split(" ");
 
             try {
             switch (responseArray[0].toUpperCase()) {
-                // TODO: make sure each command has a case!
                 case "ODRAFT":
+                	if(responseArray[1].indexOf('"') != responseArray[1].lastIndexOf('"'))
                         System.out.println(d.oDraft(responseArray[2].toUpperCase(), responseArray[1].toUpperCase()));
+                	else if((responseArray[1].indexOf('"') >=0) && (responseArray[2].indexOf('"') >0))
+                		System.out.println(d.oDraft(responseArray[3].toUpperCase(), responseArray[1].toUpperCase()+" "+responseArray[2].toUpperCase()));
+                	else
+                		System.out.println("Please provide team name, followed by player name in qoutation marks");
                     break;
                 case "IDRAFT":
+                	if(responseArray[1].indexOf('"') != responseArray[1].lastIndexOf('"'))
                         System.out.println(d.iDraft(responseArray[1].toUpperCase()));
+                	else if((responseArray[1].indexOf('"') >=0) && (responseArray[2].indexOf('"') >0))
+                		System.out.println(d.iDraft(responseArray[1].toUpperCase()+" "+responseArray[2].toUpperCase()));
+                	else
+                		System.out.println("Please provide Player name in qoutation marks");
                     break;
                 case "OVERALL":
-                    if (responseArray.length == 2) {
+                    if (responseArray.length > 1) {
                         System.out.println(d.overall(responseArray[1].toUpperCase()));
                     }
-                    if (responseArray.length == 1) {
+                    else if (responseArray.length == 1) {
                         System.out.println(d.overall(""));
                     }
                     break;
@@ -65,10 +77,10 @@ public class Driver {
                     d.restore(responseArray[1]);
                     break;
                 case "EVALFUN":
-                    d.evalFun(responseArray[1]);
+                    d.evalFun(responseArray[1].toUpperCase());
                     break;
                 case "PEVALFUN":
-                    d.pEvalFun(responseArray[1]);
+                    d.pEvalFun(responseArray[1].toUpperCase());
                     break;
                 case "QUIT":
                     System.exit(0);
