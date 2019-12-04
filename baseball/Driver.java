@@ -67,10 +67,16 @@ public class Driver {
 					d.restore(responseArray[1]);
 					break;
 				case "EVALFUN":
-					d.evalFun(responseArray[1].toUpperCase());
+					String exp = "";
+                	for(int i = 1; i < responseArray.length; i++)
+                		exp += responseArray[i];
+                	d.evalFun(exp.toUpperCase());
 					break;
 				case "PEVALFUN":
-					d.pEvalFun(responseArray[1].toUpperCase());
+					String pExp = "";
+                	for(int i = 1; i < responseArray.length; i++)
+                		pExp += responseArray[i];
+                	d.pEvalFun(pExp.toUpperCase());
 					break;
 				case "QUIT":
 					System.exit(0);

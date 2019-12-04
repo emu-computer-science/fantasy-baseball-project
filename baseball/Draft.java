@@ -105,7 +105,6 @@ public class Draft {
                 }
             }
 
-            System.out.println(name);
             return "Player not found";
         }
     }
@@ -253,14 +252,14 @@ public class Draft {
         }
     }
 
-    public void pEvalFun(String expression) throws ScriptException {
+    public void pEvalFun(String expression)  {
         try {
             ScriptEngineManager mgr = new ScriptEngineManager();
             ScriptEngine engine = mgr.getEngineByName("JavaScript");
             for (int i = 0; i < pitchers.size(); i++) {
                 engine.put("ERA", pitchers.get(i).getEra());
                 engine.put("WHIP", pitchers.get(i).getWhip());
-                engine.put("SO", pitchers.get(i).getSo());
+                engine.put("SO", 1.0 * pitchers.get(i).getSo());
                 engine.put("AVG", pitchers.get(i).getAvg());
                 engine.put("IP", pitchers.get(i).getIp());
                 double playerEval=(double) engine.eval(expression);
@@ -268,9 +267,10 @@ public class Draft {
             }
             Collections.sort(pitchers,
                     (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
-        } catch (Exception e) {
+        } catch (ScriptException e) {
             System.out.println("Please only use approved variables, ERA, WHIP, "
                     + "AVG, IP");
+            
         }
     }
 
