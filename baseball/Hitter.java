@@ -10,7 +10,8 @@ public class Hitter extends Player {
     private int homeRuns;
     private String position;
 
-    Hitter(String firstName, String lastName, String position, String team, int runs, int hits, int homeRuns, double avg, double obp, double ops) {
+    Hitter(String firstName, String lastName, String position, String team, 
+    		int runs, int hits, int homeRuns, double avg, double obp, double ops) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
@@ -21,11 +22,12 @@ public class Hitter extends Player {
         this.avg = avg;
         this.obp = obp;
         this.ops = ops;
+        this.setValuation(getAvg());
     }
 
     @Override
     public String toString() {
-        return getPosition() + " " + getName();
+        return  getPosition() + " " + getName();
     }
 
     public String getPosition() {
