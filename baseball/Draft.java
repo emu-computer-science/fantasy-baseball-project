@@ -231,7 +231,7 @@ public class Draft {
         return true;
     }
 
-    public void evalFun(String expression) throws ScriptException {
+    public void evalFun(String expression) {
         try {
             ScriptEngineManager mgr = new ScriptEngineManager();
             ScriptEngine engine = mgr.getEngineByName("JavaScript");

@@ -6,7 +6,7 @@ import javax.script.ScriptException;
 
 public class Driver {
 
-	public static void main(String[] args) throws ScriptException {
+	public static void main(String[] args) {
 		// Use this scanner to read the user input!
 		Scanner keyboard = new Scanner(System.in);
 
