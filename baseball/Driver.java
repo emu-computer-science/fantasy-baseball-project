@@ -76,7 +76,8 @@ public class Driver {
 					String pExp = "";
                 	for(int i = 1; i < responseArray.length; i++)
                 		pExp += responseArray[i];
-                	d.pEvalFun(pExp.toUpperCase());
+                	if(!pExp.isEmpty())
+                		d.pEvalFun(pExp.toUpperCase());
 					break;
 				case "QUIT":
 					System.exit(0);

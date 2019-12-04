@@ -148,6 +148,7 @@ public class Draft {
     	if (teamA.getPitchers().size() >= 5) {
             return "Already have 5 pitchers!";
         }
+    	
         String availablePlayers = "";
         for (int i = 0; i < pitchers.size(); i++) {
         	availablePlayers += pitchers.get(i).getName() + " | " + pitchers.get(i).getTeam()
@@ -284,6 +285,8 @@ public class Draft {
                         Integer.valueOf(values[4]), Integer.valueOf(values[5]), Integer.valueOf(values[6]),
                         Double.valueOf(values[7]), Double.valueOf(values[8]), Double.valueOf(values[9])));
             }
+            Collections.sort(hitters,
+                    (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
         } catch (IOException e) {
             System.out.println("Cannot read file!");
         }
@@ -300,6 +303,8 @@ public class Draft {
                 pitchers.add(new Pitcher(values[1], values[0], values[2], Double.valueOf(values[3]), Double.valueOf(values[4]),
                         Integer.valueOf(values[5]), Double.valueOf(values[6]), Double.valueOf(values[7])));
             }
+            Collections.sort(pitchers,
+                    (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
         } catch (IOException e) {
             System.out.println("Cannot read file!");
         }
