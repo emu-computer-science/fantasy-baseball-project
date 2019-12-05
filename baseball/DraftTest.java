@@ -10,18 +10,17 @@ public class DraftTest {
     Draft d;
     String fileName = "TestCase";
 
-    @org.junit.Before
+    @Before
     public void setUp() throws Exception {
         this.d = new Draft();
+    }
 
+    @Test
+    public void save() {
         d.oDraft("A", "Soroka, M");
         d.oDraft("B", "Verlander, J");
         d.oDraft("C", "Rodriguez, E");
         d.oDraft("D", "Bellinger, C");
-    }
-
-    @org.junit.Test
-    public void save() {
         d.save(fileName);
         File file = new File(fileName + " A.fantasy.txt");
         assertTrue(file.exists());
@@ -34,21 +33,15 @@ public class DraftTest {
     }
 
 
-    @org.junit.Test
+    @Test
     public void restore() {
-        d.save(fileName);
+        save();
         d.restore(fileName);
 
         assertEquals(d.teamA.fullRoster.get(0).getName(), "Soroka, M");
         assertEquals(d.teamB.fullRoster.get(0).getName(), "Verlander, J");
         assertEquals(d.teamC.fullRoster.get(0).getName(), "Rodriguez, E");
         assertEquals(d.teamD.fullRoster.get(0).getName(), "Bellinger, C");
-    }
-
-    Draft d;
-    @Before
-    public void before() {
-        d = new Draft();
     }
 
     @Test
