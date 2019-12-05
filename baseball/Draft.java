@@ -270,7 +270,7 @@ public class Draft {
                     (o1, o2) -> o2.getValuation().compareTo(o1.getValuation()));
         } catch (ScriptException e) {
             System.out.println("Please only use approved variables, ERA, WHIP, "
-                    + "AVG, IP");
+                    + "AVG, IP, SO");
             
         }
     }
